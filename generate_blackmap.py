@@ -86,11 +86,10 @@ def Mag( vec:np.ndarray ) -> np.float64:
 	
 
 
-def closestTo( ITEM:np.ndarray, b=(0,255), invert=True) -> bool:
+def closestTo( ITEM:np.ndarray, b=(0,255), THRESH=2.5, invert=True) -> bool:
 	# Invert Parameter:
 	# [ True  ] : Break Black Pixels
 	# [ False ] : Break White Pixels
-	THRESH = 1.1
 	distances_255 = 255.0 - ITEM
 	
 	# Check if Item Should be Identified as White
@@ -100,24 +99,63 @@ def closestTo( ITEM:np.ndarray, b=(0,255), invert=True) -> bool:
 	Breakable = not CASE if invert else CASE
 	return Breakable
 
+def hidePlotBounds(ax):
+	'''
+	Function: hidePlotBounds
+	Summary: Hides the Matplotlib Plot Bounds
+	Examples: hidePlotBounds(plt)
+	Attributes:
+		@param (ax): Matplotlib Axis Object
+	Returns: None
+	'''
+	ax.spines["top"].set_visible(False)
+	ax.spines["right"].set_visible(False)
+	ax.spines["bottom"].set_visible(False)
+	ax.spines["left"].set_visible(False)
+
+	ax.set_xticklabels([])
+	ax.set_yticklabels([])
+
+	ax.set_xticks([])
+	ax.set_yticks([])
+
+	ax.axes.get_xaxis().set_visible(False)
+	ax.axes.get_yaxis().set_visible(False)
+
+
 boolean = np.array([], dtype=bool)
 LO = []
+L_NEG = []
 
 for x in [ tqdm(X_test) if VERBOSE else X_test ][0]:
 	TMP = []
+	TMP2 = []
 	for y in x:
-		TMP.append(closestTo(y))
+		TMP.append(closestTo(y, THRESH=1))
+		TMP2.append(closestTo(y, THRESH=2.5))
 	LO.append(np.array(TMP))
+	L_NEG.append(np.array(TMP2))
 	
 LO = np.array(LO)
+L_NEG = np.array(L_NEG)
+
 LO = np.expand_dims(LO, axis=0)[0]
+L_NEG = np.expand_dims(L_NEG, axis=0)[0]
+
 LCOORDS = []
+LCOORDS_NEG = []
 
 for x in [ trange(len(LO)) if VERBOSE else range(len(LO)) ][0]:
 	for y in range(x):
 		LCOORDS.append( [ x, y, LO[x][y] ] )
+		LCOORDS_NEG.append( [ x, y, L_NEG[x][y] ] )
 
 compressData(LCOORDS)
 
-plt.imshow(LO, cmap="binary")
-plt.savefig(os.path.join(os.path.dirname(__file__), "MAP", "out.png"))
+fig, (ax1, ax2) = plt.subplots(1, 1, figsize=(30, 60))
+
+ax1.imshow(LO, cmap="binary")
+ax2.imshow(L_NEG, cmap="binary")
+hidePlotBounds(ax1)
+hidePlotBounds(ax2)
+plt.savefig(os.path.join(os.path.dirname(__file__), "MAP", "out.png"), block=True)
