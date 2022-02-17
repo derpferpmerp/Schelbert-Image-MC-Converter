@@ -152,10 +152,10 @@ for x in [ trange(len(LO)) if VERBOSE else range(len(LO)) ][0]:
 
 compressData(LCOORDS)
 
-fig, (ax1, ax2) = plt.subplots(1, 1, figsize=(30, 60))
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(60, 30))
 
 ax1.imshow(LO, cmap="binary")
 ax2.imshow(L_NEG, cmap="binary")
 hidePlotBounds(ax1)
 hidePlotBounds(ax2)
-plt.savefig(os.path.join(os.path.dirname(__file__), "MAP", "out.png"), block=True)
+plt.savefig(os.path.join(os.path.dirname(__file__), "MAP", "out.png"))
