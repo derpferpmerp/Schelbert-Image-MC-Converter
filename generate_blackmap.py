@@ -86,7 +86,7 @@ def Mag( vec:np.ndarray ):
 	
 
 
-def closestTo( ITEM:np.ndarray, b=(0,255), invert=False):
+def closestTo( ITEM:np.ndarray, b=(0,255), invert=True):
 	# Invert Parameter:
 	# [ True  ] : Break Black Pixels
 	# [ False ] : Break White Pixels
