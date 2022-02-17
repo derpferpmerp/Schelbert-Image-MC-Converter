@@ -78,7 +78,7 @@ removeIfExists("DATADUMP.txt")
 
 X_test = image.img_to_array(X_test)  # convert image into array
 
-def Mag( vec:np.ndarray ):
+def Mag( vec:np.ndarray ) -> np.float64:
 	m = 0
 	for x in vec:
 		m += x * x
@@ -86,7 +86,7 @@ def Mag( vec:np.ndarray ):
 	
 
 
-def closestTo( ITEM:np.ndarray, b=(0,255), invert=True):
+def closestTo( ITEM:np.ndarray, b=(0,255), invert=True) -> bool:
 	# Invert Parameter:
 	# [ True  ] : Break Black Pixels
 	# [ False ] : Break White Pixels
