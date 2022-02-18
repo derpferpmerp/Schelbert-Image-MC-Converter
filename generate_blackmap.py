@@ -47,7 +47,7 @@ parser.add_argument(
 	dest="showNames",
 	action='store_true',
 	default=False,
-	help='add verbose cli'
+	help='show names in the render'
 )
 
 args = parser.parse_args()
