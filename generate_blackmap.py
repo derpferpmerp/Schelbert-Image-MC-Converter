@@ -147,6 +147,8 @@ LCOORDS_NEG = []
 
 for x in [ trange(len(LO)) if VERBOSE else range(len(LO)) ][0]:
 	for y in range(x):
+		if L_NEG[x,y]:
+			LO[x][y] = False
 		LCOORDS.append( [ x, y, LO[x][y] ] )
 		LCOORDS_NEG.append( [ x, y, L_NEG[x][y] ] )
 
