@@ -41,6 +41,15 @@ parser.add_argument(
 	help='add verbose cli'
 )
 
+parser.add_argument(
+	'-n',
+	'--showNames',
+	dest="showNames",
+	action='store_true',
+	default=False,
+	help='add verbose cli'
+)
+
 args = parser.parse_args()
 print(args)
 if args.inFile == "None" and args.url == "None":
@@ -50,6 +59,7 @@ if args.inFile == "None" and args.url == "None":
 IMG_URL = "https://images3.alphacoders.com/209/20979.jpg" if not args.url else args.url
 TRANSFER_PROTOCOL = "file" if args.inFile != "None" else ("url" if args.url != "None" else "invalid")
 VERBOSE = args.verbose
+SHOW_NAMES = args.showNames
 
 if TRANSFER_PROTOCOL == "file":
 	if os.path.exists(args.inFile):
@@ -147,12 +157,12 @@ LCOORDS_NEG = []
 
 for x in [ trange(len(LO)) if VERBOSE else range(len(LO)) ][0]:
 	for y in range(len(LO)):
-		if not LO[x,y]:
+		if not LO[x,y] and not SHOW_NAMES:
 			L_NEG[x][y] = True
 		LCOORDS.append( [ x, y, LO[x][y] ] )
 		LCOORDS_NEG.append( [ x, y, L_NEG[x][y] ] )
 
-compressData(LCOORDS)
+compressData(LCOORDS_NEG)
 plt.style.use("dark_background")
 N = len(LCOORDS_NEG)/100
 fig, ax = plt.subplots(1, 1, figsize=(30, 30))
