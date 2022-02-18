@@ -155,7 +155,7 @@ for x in [ trange(len(LO)) if VERBOSE else range(len(LO)) ][0]:
 compressData(LCOORDS)
 plt.style.use("dark_background")
 N = len(LCOORDS_NEG)/100
-fig, ax = plt.subplots(1, 1, figsize=(N, N))
+fig, ax = plt.subplots(1, 1, figsize=(30, 30))
 
 ax.imshow(L_NEG, cmap="binary")
 hidePlotBounds(ax)
