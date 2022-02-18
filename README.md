@@ -4,6 +4,9 @@ This script can generate a google map thumbnail<br>
 given coordinates, and then can convert that image<br>
 into an array suitable for Minecraft Education Edition...
 
+
+
+
 ```java
 usage: map_generator.py [-h] [-lo LONGITUDE] [-la LATITUDE] [--width WIDTH] [--height HEIGHT] [-z ZOOM]
 
@@ -19,6 +22,9 @@ optional arguments:
   --height HEIGHT       Pixel Height of the Map
   -z ZOOM, --zoom ZOOM  Amount to Zoom for Map
 ```
+
+Here's an example of a generated image with `map_generator.py`:<br>
+<img src="https://i.ibb.co/TKHjCHz/EVANSTON.png" width="400" height="400" />
 
 ```java
 usage: generate_blackmap.py [-h] [-u URL | -f INFILE] [-v] [-n]
