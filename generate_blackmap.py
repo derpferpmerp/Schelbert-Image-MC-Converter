@@ -146,18 +146,17 @@ LCOORDS = []
 LCOORDS_NEG = []
 
 for x in [ trange(len(LO)) if VERBOSE else range(len(LO)) ][0]:
-	for y in range(x):
-		if L_NEG[x,y]:
-			LO[x][y] = False
+	for y in range(len(LO)):
+		if not LO[x,y]:
+			L_NEG[x][y] = True
 		LCOORDS.append( [ x, y, LO[x][y] ] )
 		LCOORDS_NEG.append( [ x, y, L_NEG[x][y] ] )
 
 compressData(LCOORDS)
+plt.style.use("dark_background")
+N = len(LCOORDS_NEG)/100
+fig, ax = plt.subplots(1, 1, figsize=(N, N))
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(60, 30))
-
-ax1.imshow(LO, cmap="binary")
-ax2.imshow(L_NEG, cmap="binary")
-hidePlotBounds(ax1)
-hidePlotBounds(ax2)
+ax.imshow(L_NEG, cmap="binary")
+hidePlotBounds(ax)
 plt.savefig(os.path.join(os.path.dirname(__file__), "MAP", "out.png"))
