@@ -169,4 +169,9 @@ fig, ax = plt.subplots(1, 1, figsize=(30, 30))
 
 ax.imshow(L_NEG, cmap="binary")
 hidePlotBounds(ax)
-plt.savefig(os.path.join(os.path.dirname(__file__), "MAP", "out.png"))
+plt.savefig(
+	os.path.join(os.path.dirname(__file__), "MAP", "out.png"),
+	bbox_inches="tight",
+	pad_inches=0,
+	format="png",
+)
