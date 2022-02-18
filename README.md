@@ -21,13 +21,14 @@ optional arguments:
 ```
 
 ```java
-usage: generate_blackmap.py [-h] [-u URL | -f INFILE] [-v]
+usage: generate_blackmap.py [-h] [-u URL | -f INFILE] [-v] [-n]
 
 Generate MC Conversion
 
 optional arguments:
-  -h, --help     show this help message and exit
-  -u URL         Supply the URL for the Image
-  -f INFILE      Supply the Input File for the Image
-  -v, --verbose  add verbose cli
+  -h, --help       show this help message and exit
+  -u URL           Supply the URL for the Image
+  -f INFILE        Supply the Input File for the Image
+  -v, --verbose    add verbose cli
+  -n, --showNames  show names in the render
 ```
